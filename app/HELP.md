@@ -1,7 +1,7 @@
 # Read Me First
 The following was discovered as part of building this project:
 
-* The original package name 'com.example.Library-System' is invalid and this project uses 'com.example.Library_System' instead.
+* The original package name 'com.example.Library Manager' is invalid and this project uses 'com.example.Library.Manager' instead.
 
 # Getting Started
 
@@ -22,9 +22,9 @@ The following guides illustrate how to use some features concretely:
 * [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
 * [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
 * [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
+* [Accessing data with MySQL](https://spring.io/guides/gs/accessing-data-mysql/)
 * [Accessing Relational Data using JDBC with Spring](https://spring.io/guides/gs/relational-data-access/)
 * [Managing Transactions](https://spring.io/guides/gs/managing-transactions/)
-* [Accessing data with MySQL](https://spring.io/guides/gs/accessing-data-mysql/)
 
 ### Maven Parent overrides
 
