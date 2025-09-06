@@ -1,4 +1,8 @@
 package com.example.Library.Manager;
 
-public interface Command {
+import org.springframework.http.ResponseEntity;
+
+public interface Command<I, O> {
+
+    public ResponseEntity<O> run(I input);
 }

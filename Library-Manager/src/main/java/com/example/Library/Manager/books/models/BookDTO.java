@@ -1,41 +1,30 @@
 package com.example.Library.Manager.books.models;
 
-import jakarta.persistence.*;
-import org.antlr.v4.runtime.misc.NotNull;
-
 import java.util.Objects;
 
-@Entity
-public class Book {
-    @jakarta.persistence.Id
-    @NotNull
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ISBN")
-    private int bookId;
-
-    @Column(name = "Title")
+public class BookDTO {
+    private int id;
     private String title;
-
-    @Column(name = "Author")
     private String author;
-
-    @Column(name = "Publisher")
     private String publisher;
-
-    @Column(name = "Genre")
     private String genre;
-
-    @Column(name = "PageLength")
     private int pageLength;
 
-    public Book() {}
-
-    public int getBookId() {
-        return bookId;
+    public BookDTO(Book book) {
+        this.id = book.getBookId();
+        this.title = book.getTitle();
+        this.author = book.getAuthor();
+        this.publisher = book.getPublisher();
+        this.genre = book.getGenre();
+        this.pageLength = book.getPageLength();
     }
 
-    public void setBookId(int bookId) {
-        this.bookId = bookId;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -81,12 +70,12 @@ public class Book {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Book book = (Book) o;
-        return bookId == book.bookId && pageLength == book.pageLength && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(publisher, book.publisher) && Objects.equals(genre, book.genre);
+        BookDTO bookDTO = (BookDTO) o;
+        return id == bookDTO.id && pageLength == bookDTO.pageLength && Objects.equals(title, bookDTO.title) && Objects.equals(author, bookDTO.author) && Objects.equals(publisher, bookDTO.publisher) && Objects.equals(genre, bookDTO.genre);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bookId, title, author, publisher, genre, pageLength);
+        return Objects.hash(id, title, author, publisher, genre, pageLength);
     }
 }
