@@ -1,8 +1,8 @@
- create database library;
+create database library;
 
- use library;
+use library;
 
- create table Book(
+create table Book(
  	ISBN int not null auto_increment,
      Title varchar(255) default "Lorem Ipsum",
      Author varchar(255) default "John Doe",
@@ -13,7 +13,7 @@
      primary key (ISBN)
  );
 
- insert into Book(Title, Author, Publisher, Genre, PageLength) values
+insert into Book(Title, Author, Publisher, Genre, PageLength) values
  	("Frankenstein", "Mary Shelly", "Simon & Schuster", "Horror", 250),
      ("Don Quixote", "Miguel de Cervantes", "", "Adventure", 500),
      ("Dictionary", "", "", "", 1000);
