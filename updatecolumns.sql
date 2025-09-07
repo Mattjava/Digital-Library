@@ -1,5 +1,7 @@
 -- Run before starting Spring Boot.
 
+use library;
+
 alter table book rename column ISBN to isbn; 
 alter table book rename column Title to title;
 alter table book rename column Author to author;
