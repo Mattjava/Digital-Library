@@ -6,26 +6,27 @@ import org.antlr.v4.runtime.misc.NotNull;
 import java.util.Objects;
 
 @Entity
+@Table(name="book")
 public class Book {
-    @jakarta.persistence.Id
+    @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ISBN")
+    @Column(name = "isbn")
     private int bookId;
 
-    @Column(name = "Title")
+    @Column(name = "title")
     private String title;
 
-    @Column(name = "Author")
+    @Column(name = "author")
     private String author;
 
-    @Column(name = "Publisher")
+    @Column(name = "publisher")
     private String publisher;
 
-    @Column(name = "Genre")
+    @Column(name = "genre")
     private String genre;
 
-    @Column(name = "PageLength")
+    @Column(name = "page_length")
     private int pageLength;
 
     public Book() {}
