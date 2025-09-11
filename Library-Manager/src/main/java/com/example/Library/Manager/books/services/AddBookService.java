@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AddBookService implements Command<Book, ResponseEntity<String>> {
+public class AddBookService implements Command<Book, String> {
     private final BookRepository bookRepository;
 
     public AddBookService(BookRepository bookRepository) {

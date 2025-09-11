@@ -4,5 +4,5 @@ import org.springframework.http.ResponseEntity;
 
 public interface Command<I, O> {
 
-    public ResponseEntity<String> run(I input);
+    public ResponseEntity<O> run(I input);
 }

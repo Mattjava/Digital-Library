@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class DeleteBookService implements Command<Integer, ResponseEntity<String>> {
+public class DeleteBookService implements Command<Integer, String> {
 
     private BookRepository bookRepository;
 
