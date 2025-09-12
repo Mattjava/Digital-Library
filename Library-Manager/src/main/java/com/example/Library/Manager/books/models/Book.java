@@ -17,8 +17,9 @@ public class Book {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "author")
-    private String author;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "author")
+    private Author author;
 
     @Column(name = "publisher")
     private String publisher;
@@ -47,11 +48,11 @@ public class Book {
         this.title = title;
     }
 
-    public String getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 

@@ -1,21 +1,44 @@
-create database library;
+
+-- VV Run if database isn't created VV
+-- create database library;
+
+-- VV Uncomment this if you want to reset the tables VV
+-- drop table book;
+-- drop table author;
+
 
 use library;
 
+create table author(
+	id int not null auto_increment,
+    name varchar(255) default "John Doe",
+    city varchar(255) default "No City",
+    country varchar(255) default "No Country",
+    website varchar(255) default "https://example.com",
+    
+    primary key(id)
+);
+
 create table Book(
- 	ISBN int not null auto_increment,
-     Title varchar(255) default "Lorem Ipsum",
-     Author varchar(255) default "John Doe",
-     Publisher varchar(255) default "No Publisher",
-     Genre varchar(255) default "None",
-     PageLength int default 100,
+ 	isbn int not null auto_increment,
+     title varchar(255) default "Lorem Ipsum",
+     author int,
+     publisher varchar(255) default "No Publisher",
+     genre varchar(255) default "None",
+     page_length int default 100,
      
-     primary key (ISBN)
+     primary key (isbn),
+	 foreign key (author) references author(id)
  );
 
-insert into Book(Title, Author, Publisher, Genre, PageLength) values
- 	("Frankenstein", "Mary Shelly", "Simon & Schuster", "Horror", 250),
-     ("Don Quixote", "Miguel de Cervantes", "", "Adventure", 500),
-     ("Dictionary", "", "", "", 1000);
+insert into author(name, city, country, website) values
+	("Mary Shelley", "London", "United Kingdom", " "),
+    ("Miguel de Cervantes", "Madrid", "Spain", "https://en.wikipedia.org/wiki/Miguel_de_Cervantes"),
+    ("John Doe", "New York City", "United States", "");
+
+insert into Book(title, author, publisher, genre, page_length) values
+ 	("Frankenstein", 1, "Simon & Schuster", "Horror", 250),
+     ("Don Quixote", 2, "", "Adventure", 500),
+     ("Dictionary", 3, "", "", 1000);
     
-select * from Book where Author != "";
+select book.title, author.name, book.publisher, book.page_length from book right join author on book.author = author.id;

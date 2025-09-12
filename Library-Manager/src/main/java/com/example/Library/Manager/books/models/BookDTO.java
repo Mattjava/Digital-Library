@@ -5,7 +5,7 @@ import java.util.Objects;
 public class BookDTO {
     private int id;
     private String title;
-    private String author;
+    private Author author;
     private String publisher;
     private String genre;
     private int pageLength;
@@ -35,11 +35,11 @@ public class BookDTO {
         this.title = title;
     }
 
-    public String getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 

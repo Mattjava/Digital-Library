@@ -1,6 +1,6 @@
-package com.example.Library.Manager.books.services;
+package com.example.Library.Manager.books.services.BookServices;
 
-import com.example.Library.Manager.books.BookRepository;
+import com.example.Library.Manager.books.repositories.BookRepository;
 import com.example.Library.Manager.Query;
 import com.example.Library.Manager.books.models.Book;
 import com.example.Library.Manager.books.models.BookDTO;

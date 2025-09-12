@@ -1,7 +1,7 @@
-package com.example.Library.Manager.books.services;
+package com.example.Library.Manager.books.services.BookServices;
 
 import com.example.Library.Manager.Command;
-import com.example.Library.Manager.books.BookRepository;
+import com.example.Library.Manager.books.repositories.BookRepository;
 import com.example.Library.Manager.books.models.Book;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
