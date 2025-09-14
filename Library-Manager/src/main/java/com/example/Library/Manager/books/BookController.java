@@ -1,9 +1,7 @@
 package com.example.Library.Manager.books;
 
-import com.example.Library.Manager.books.models.AuthorDTO;
-import com.example.Library.Manager.books.models.Book;
-import com.example.Library.Manager.books.models.BookDTO;
-import com.example.Library.Manager.books.models.EditBookPackage;
+import com.example.Library.Manager.books.models.*;
+import com.example.Library.Manager.books.services.AuthorServices.AddAuthorService;
 import com.example.Library.Manager.books.services.AuthorServices.GetAllAuthorsService;
 import com.example.Library.Manager.books.services.BookServices.*;
 import org.springframework.http.ResponseEntity;
@@ -20,17 +18,21 @@ public class BookController {
     private DeleteBookService deleteBookService;
     private EditBookService editBookService;
 
+    private AddAuthorService addAuthorService;
+
     public BookController(GetAllBooksService getAllBooksService,
                           AddBookService addBookService,
                           DeleteBookService deleteBookService,
                           EditBookService editBookService,
-                          GetAllAuthorsService getAllAuthorsService) {
+                          GetAllAuthorsService getAllAuthorsService,
+                          AddAuthorService addAuthorService) {
 
         this.getAllAuthorsService = getAllAuthorsService;
         this.addBookService = addBookService;
         this.deleteBookService = deleteBookService;
         this.editBookService = editBookService;
         this.getAllBooksService = getAllBooksService;
+        this.addAuthorService = addAuthorService;
     }
 
     @GetMapping("books")
@@ -43,10 +45,17 @@ public class BookController {
         return getAllAuthorsService.run(null);
     }
 
-    @PostMapping
-    public ResponseEntity<String> addBook(@RequestBody Book book)
+    @PostMapping("books/{authorId}")
+    public ResponseEntity<BookDTO> addBook(@RequestBody Book book, @PathVariable Integer authorId)
     {
-        return addBookService.run(book);
+        AddBookPackage pack = new AddBookPackage(book, authorId);
+        return addBookService.run(pack);
+    }
+
+    @PostMapping("author")
+    public ResponseEntity<AuthorDTO> addAuthor(@RequestBody Author author)
+    {
+        return addAuthorService.run(author);
     }
 
     @DeleteMapping("/{ibsn}")

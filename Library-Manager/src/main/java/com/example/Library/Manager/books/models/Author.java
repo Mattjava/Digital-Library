@@ -1,15 +1,15 @@
 package com.example.Library.Manager.books.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.antlr.v4.runtime.misc.NotNull;
 
 
 @Entity
 @Table(name="author")
 public class Author {
     @Id
+    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Integer id;
 
