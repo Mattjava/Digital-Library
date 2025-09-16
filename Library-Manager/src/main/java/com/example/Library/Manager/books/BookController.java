@@ -58,14 +58,14 @@ public class BookController {
         return addAuthorService.run(author);
     }
 
-    @DeleteMapping("/{ibsn}")
+    @DeleteMapping("books/{ibsn}")
     public ResponseEntity<String> deleteBook(@PathVariable Integer ibsn)
     {
         return deleteBookService.run(ibsn);
     }
 
-    @PutMapping("/{ibsn}")
-    public ResponseEntity<String> editBook(@PathVariable Integer ibsn, @RequestBody Book newBook)
+    @PutMapping("books/{ibsn}")
+    public ResponseEntity<BookDTO> editBook(@PathVariable Integer ibsn, @RequestBody Book newBook)
     {
         EditBookPackage editBookPackage = new EditBookPackage(ibsn, newBook);
         return editBookService.run(editBookPackage);

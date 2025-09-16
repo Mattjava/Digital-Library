@@ -1,6 +1,7 @@
 package com.example.Library.Manager.books.services.BookServices;
 
 import com.example.Library.Manager.Query;
+import com.example.Library.Manager.books.models.BookDTO;
 import com.example.Library.Manager.books.repositories.BookRepository;
 import com.example.Library.Manager.books.models.Book;
 import com.example.Library.Manager.books.models.EditBookPackage;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class EditBookService implements Query<EditBookPackage, String> {
+public class EditBookService implements Query<EditBookPackage, BookDTO> {
     private BookRepository bookRepository;
 
     public EditBookService(BookRepository bookRepository)
@@ -20,17 +21,18 @@ public class EditBookService implements Query<EditBookPackage, String> {
     }
 
     @Override
-    public ResponseEntity<String> run(EditBookPackage input) {
+    public ResponseEntity<BookDTO> run(EditBookPackage input) {
         Optional<Book> oldBook = bookRepository.findById(input.getId());
 
         if(oldBook.isPresent()) {
             Book newBook = input.getBook();
             newBook.setBookId(input.getId());
+            newBook.setAuthor(oldBook.get().getAuthor());
             bookRepository.save(newBook);
 
-            return ResponseEntity.ok(newBook.getTitle() + " has been changed");
+            return ResponseEntity.ok(new BookDTO(newBook));
         }
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Book not found. Please create one");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 }
