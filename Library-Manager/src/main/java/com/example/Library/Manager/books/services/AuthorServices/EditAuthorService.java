@@ -7,9 +7,11 @@ import com.example.Library.Manager.books.models.packages.EditAuthorPackage;
 import com.example.Library.Manager.books.repositories.AuthorRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class EditAuthorService implements Command<EditAuthorPackage, AuthorDTO> {
     private AuthorRepository authorRepository;
 
