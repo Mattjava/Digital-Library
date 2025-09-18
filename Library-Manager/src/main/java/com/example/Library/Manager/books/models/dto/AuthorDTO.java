@@ -1,4 +1,6 @@
-package com.example.Library.Manager.books.models;
+package com.example.Library.Manager.books.models.dto;
+
+import com.example.Library.Manager.books.models.Author;
 
 public class AuthorDTO {
     private int id;

@@ -1,4 +1,6 @@
-package com.example.Library.Manager.books.models;
+package com.example.Library.Manager.books.models.packages;
+
+import com.example.Library.Manager.books.models.Book;
 
 public class EditBookPackage {
     private Integer id;

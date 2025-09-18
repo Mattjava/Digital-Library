@@ -1,4 +1,7 @@
-package com.example.Library.Manager.books.models;
+package com.example.Library.Manager.books.models.dto;
+
+import com.example.Library.Manager.books.models.Author;
+import com.example.Library.Manager.books.models.Book;
 
 import java.util.Objects;
 

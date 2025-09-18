@@ -2,7 +2,7 @@ package com.example.Library.Manager.books.services.AuthorServices;
 
 import com.example.Library.Manager.Query;
 import com.example.Library.Manager.books.models.Author;
-import com.example.Library.Manager.books.models.AuthorDTO;
+import com.example.Library.Manager.books.models.dto.AuthorDTO;
 import com.example.Library.Manager.books.repositories.AuthorRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
