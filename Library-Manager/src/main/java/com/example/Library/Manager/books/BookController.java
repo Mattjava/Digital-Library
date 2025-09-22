@@ -6,10 +6,7 @@ import com.example.Library.Manager.books.models.dto.BookDTO;
 import com.example.Library.Manager.books.models.packages.AddBookPackage;
 import com.example.Library.Manager.books.models.packages.EditAuthorPackage;
 import com.example.Library.Manager.books.models.packages.EditBookPackage;
-import com.example.Library.Manager.books.services.AuthorServices.AddAuthorService;
-import com.example.Library.Manager.books.services.AuthorServices.DeleteAuthorService;
-import com.example.Library.Manager.books.services.AuthorServices.EditAuthorService;
-import com.example.Library.Manager.books.services.AuthorServices.GetAllAuthorsService;
+import com.example.Library.Manager.books.services.AuthorServices.*;
 import com.example.Library.Manager.books.services.BookServices.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,28 +17,40 @@ import java.util.List;
 public class BookController {
 
     private GetAllBooksService getAllBooksService;
+    private GetBookService getBookService;
+    private FindAllBooksByAuthorService findAllBooksByAuthorService;
     private AddBookService addBookService;
     private DeleteBookService deleteBookService;
     private EditBookService editBookService;
 
     private GetAllAuthorsService getAllAuthorsService;
+    private GetAuthorService getAuthorService;
+    private FindAuthorsByCountry findAuthorsByCountry;
     private AddAuthorService addAuthorService;
     private EditAuthorService editAuthorService;
     private DeleteAuthorService deleteAuthorService;
 
     public BookController(GetAllBooksService getAllBooksService,
+                          GetBookService getBookService,
+                          FindAllBooksByAuthorService findAllBooksByAuthorService,
                           AddBookService addBookService,
                           DeleteBookService deleteBookService,
                           EditBookService editBookService,
                           GetAllAuthorsService getAllAuthorsService,
+                          GetAuthorService getAuthorService,
+                          FindAuthorsByCountry findAuthorsByCountry,
                           AddAuthorService addAuthorService,
                           EditAuthorService editAuthorService,
                           DeleteAuthorService deleteAuthorService) {
         this.getAllBooksService = getAllBooksService;
+        this.getBookService = getBookService;
+        this.findAllBooksByAuthorService = findAllBooksByAuthorService;
         this.addBookService = addBookService;
         this.deleteBookService = deleteBookService;
         this.editBookService = editBookService;
         this.getAllAuthorsService = getAllAuthorsService;
+        this.getAuthorService = getAuthorService;
+        this.findAuthorsByCountry = findAuthorsByCountry;
         this.addAuthorService = addAuthorService;
         this.editAuthorService = editAuthorService;
         this.deleteAuthorService = deleteAuthorService;
@@ -52,9 +61,29 @@ public class BookController {
         return getAllBooksService.run(null);
     }
 
+    @GetMapping("books/{bookId}")
+    public ResponseEntity<BookDTO> getBookById(@PathVariable Integer bookId) {
+        return getBookService.run(bookId);
+    }
+
     @GetMapping("author")
     public ResponseEntity<List<AuthorDTO>> getAllBooksFromAuthor() {
         return getAllAuthorsService.run(null);
+    }
+
+    @GetMapping("author/{authorId}")
+    public ResponseEntity<AuthorDTO> getAuthorById(@PathVariable Integer authorId) {
+        return getAuthorService.run(authorId);
+    }
+
+    @GetMapping("books/author/{authorId}")
+    public ResponseEntity<List<BookDTO>> getAllBooksFromAuthorId(@PathVariable Integer authorId) {
+        return findAllBooksByAuthorService.run(authorId);
+    }
+
+    @GetMapping("author/country/{countryName}")
+    public ResponseEntity<List<AuthorDTO>> getAllBooksFromAuthorCountry(@PathVariable String countryName) {
+        return findAuthorsByCountry.run(countryName);
     }
 
     @PostMapping("books/{authorId}")
