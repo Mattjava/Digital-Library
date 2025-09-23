@@ -83,7 +83,6 @@ public class BookController {
 
     @GetMapping("author/country/{countryName}")
     public ResponseEntity<List<AuthorDTO>> getAllBooksFromAuthorCountry(@PathVariable String countryName) {
-        System.out.println(countryName);
         return findAuthorsByCountry.run(countryName);
     }
 
