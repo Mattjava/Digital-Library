@@ -18,7 +18,6 @@ public class FindAuthorsByCountry implements Query<String, List<AuthorDTO>> {
         this.authorRepository = authorRepository;
     }
 
-
     @Override
     public ResponseEntity<List<AuthorDTO>> run(String input) {
         List<Author> authorList = authorRepository.findByCountry(input);

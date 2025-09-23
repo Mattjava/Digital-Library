@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface AuthorRepository extends JpaRepository<Author, Integer> {
 
-    @Query("select author.name from Author author where author.country = :countryName")
+    @Query("select author from Author author where author.country = :countryName")
     List<Author> findByCountry(@Param("countryName") String countryName);
 }
