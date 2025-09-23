@@ -20,10 +20,25 @@ public class FindAuthorsByCountry implements Query<String, List<AuthorDTO>> {
 
     @Override
     public ResponseEntity<List<AuthorDTO>> run(String input) {
+        input = filter(input);
+
         List<Author> authorList = authorRepository.findByCountry(input);
 
         List<AuthorDTO> authorDTOList = authorList.stream().map(AuthorDTO::new).toList();
 
         return ResponseEntity.ok(authorDTOList);
+    }
+
+    private String filter(String input) {
+        String[] parts = input.split("_");
+
+        String country = "";
+
+        for(int i = 0; i < parts.length - 1; i++)
+            country += parts[i] + " ";
+
+        country += parts[parts.length - 1];
+
+        return country;
     }
 }
