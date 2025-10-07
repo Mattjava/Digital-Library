@@ -3,7 +3,7 @@ package com.example.Library.Manager.books.services.BookServices;
 import com.example.Library.Manager.books.repositories.BookRepository;
 import com.example.Library.Manager.Query;
 import com.example.Library.Manager.books.models.Book;
-import com.example.Library.Manager.books.models.BookDTO;
+import com.example.Library.Manager.books.models.dto.BookDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 

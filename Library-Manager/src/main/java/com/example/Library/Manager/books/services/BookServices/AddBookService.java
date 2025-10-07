@@ -1,9 +1,9 @@
 package com.example.Library.Manager.books.services.BookServices;
 
 import com.example.Library.Manager.Command;
-import com.example.Library.Manager.books.models.AddBookPackage;
+import com.example.Library.Manager.books.models.packages.AddBookPackage;
 import com.example.Library.Manager.books.models.Author;
-import com.example.Library.Manager.books.models.BookDTO;
+import com.example.Library.Manager.books.models.dto.BookDTO;
 import com.example.Library.Manager.books.repositories.AuthorRepository;
 import com.example.Library.Manager.books.repositories.BookRepository;
 import com.example.Library.Manager.books.models.Book;

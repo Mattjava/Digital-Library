@@ -1,8 +1,12 @@
 package com.example.Library.Manager.books;
 
 import com.example.Library.Manager.books.models.*;
-import com.example.Library.Manager.books.services.AuthorServices.AddAuthorService;
-import com.example.Library.Manager.books.services.AuthorServices.GetAllAuthorsService;
+import com.example.Library.Manager.books.models.dto.AuthorDTO;
+import com.example.Library.Manager.books.models.dto.BookDTO;
+import com.example.Library.Manager.books.models.packages.AddBookPackage;
+import com.example.Library.Manager.books.models.packages.EditAuthorPackage;
+import com.example.Library.Manager.books.models.packages.EditBookPackage;
+import com.example.Library.Manager.books.services.AuthorServices.*;
 import com.example.Library.Manager.books.services.BookServices.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,26 +17,43 @@ import java.util.List;
 public class BookController {
 
     private GetAllBooksService getAllBooksService;
-    private GetAllAuthorsService getAllAuthorsService;
+    private GetBookService getBookService;
+    private FindAllBooksByAuthorService findAllBooksByAuthorService;
     private AddBookService addBookService;
     private DeleteBookService deleteBookService;
     private EditBookService editBookService;
 
+    private GetAllAuthorsService getAllAuthorsService;
+    private GetAuthorService getAuthorService;
+    private FindAuthorsByCountry findAuthorsByCountry;
     private AddAuthorService addAuthorService;
+    private EditAuthorService editAuthorService;
+    private DeleteAuthorService deleteAuthorService;
 
     public BookController(GetAllBooksService getAllBooksService,
+                          GetBookService getBookService,
+                          FindAllBooksByAuthorService findAllBooksByAuthorService,
                           AddBookService addBookService,
                           DeleteBookService deleteBookService,
                           EditBookService editBookService,
                           GetAllAuthorsService getAllAuthorsService,
-                          AddAuthorService addAuthorService) {
-
-        this.getAllAuthorsService = getAllAuthorsService;
+                          GetAuthorService getAuthorService,
+                          FindAuthorsByCountry findAuthorsByCountry,
+                          AddAuthorService addAuthorService,
+                          EditAuthorService editAuthorService,
+                          DeleteAuthorService deleteAuthorService) {
+        this.getAllBooksService = getAllBooksService;
+        this.getBookService = getBookService;
+        this.findAllBooksByAuthorService = findAllBooksByAuthorService;
         this.addBookService = addBookService;
         this.deleteBookService = deleteBookService;
         this.editBookService = editBookService;
-        this.getAllBooksService = getAllBooksService;
+        this.getAllAuthorsService = getAllAuthorsService;
+        this.getAuthorService = getAuthorService;
+        this.findAuthorsByCountry = findAuthorsByCountry;
         this.addAuthorService = addAuthorService;
+        this.editAuthorService = editAuthorService;
+        this.deleteAuthorService = deleteAuthorService;
     }
 
     @GetMapping("books")
@@ -40,9 +61,29 @@ public class BookController {
         return getAllBooksService.run(null);
     }
 
+    @GetMapping("books/{bookId}")
+    public ResponseEntity<BookDTO> getBookById(@PathVariable Integer bookId) {
+        return getBookService.run(bookId);
+    }
+
     @GetMapping("author")
     public ResponseEntity<List<AuthorDTO>> getAllBooksFromAuthor() {
         return getAllAuthorsService.run(null);
+    }
+
+    @GetMapping("author/{authorId}")
+    public ResponseEntity<AuthorDTO> getAuthorById(@PathVariable Integer authorId) {
+        return getAuthorService.run(authorId);
+    }
+
+    @GetMapping("books/author/{authorId}")
+    public ResponseEntity<List<BookDTO>> getAllBooksFromAuthorId(@PathVariable Integer authorId) {
+        return findAllBooksByAuthorService.run(authorId);
+    }
+
+    @GetMapping("author/country/{countryName}")
+    public ResponseEntity<List<AuthorDTO>> getAllBooksFromAuthorCountry(@PathVariable String countryName) {
+        return findAuthorsByCountry.run(countryName);
     }
 
     @PostMapping("books/{authorId}")
@@ -58,16 +99,29 @@ public class BookController {
         return addAuthorService.run(author);
     }
 
+    @PutMapping("books/{ibsn}")
+    public ResponseEntity<BookDTO> editBook(@PathVariable Integer ibsn, @RequestBody Book newBook)
+    {
+        EditBookPackage editBookPackage = new EditBookPackage(ibsn, newBook);
+        return editBookService.run(editBookPackage);
+    }
+
+    @PutMapping("author/{id}")
+    public ResponseEntity<AuthorDTO> editAuthor(@PathVariable Integer id, @RequestBody Author newAuthor)
+    {
+        EditAuthorPackage editAuthorPackage = new EditAuthorPackage(newAuthor, id);
+        return editAuthorService.run(editAuthorPackage);
+    }
+
     @DeleteMapping("books/{ibsn}")
     public ResponseEntity<String> deleteBook(@PathVariable Integer ibsn)
     {
         return deleteBookService.run(ibsn);
     }
 
-    @PutMapping("books/{ibsn}")
-    public ResponseEntity<BookDTO> editBook(@PathVariable Integer ibsn, @RequestBody Book newBook)
+    @DeleteMapping("author/{id}")
+    public ResponseEntity<String> deleteAuthor(@PathVariable Integer id)
     {
-        EditBookPackage editBookPackage = new EditBookPackage(ibsn, newBook);
-        return editBookService.run(editBookPackage);
+        return deleteAuthorService.run(id);
     }
 }
