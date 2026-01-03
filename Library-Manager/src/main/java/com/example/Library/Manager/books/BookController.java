@@ -19,6 +19,7 @@ public class BookController {
     private GetAllBooksService getAllBooksService;
     private GetBookService getBookService;
     private FindAllBooksByAuthorService findAllBooksByAuthorService;
+    private FindAllBooksByCountryService findAllBooksByCountryService;
     private AddBookService addBookService;
     private DeleteBookService deleteBookService;
     private EditBookService editBookService;
@@ -30,30 +31,20 @@ public class BookController {
     private EditAuthorService editAuthorService;
     private DeleteAuthorService deleteAuthorService;
 
-    public BookController(GetAllBooksService getAllBooksService,
-                          GetBookService getBookService,
-                          FindAllBooksByAuthorService findAllBooksByAuthorService,
-                          AddBookService addBookService,
-                          DeleteBookService deleteBookService,
-                          EditBookService editBookService,
-                          GetAllAuthorsService getAllAuthorsService,
-                          GetAuthorService getAuthorService,
-                          FindAuthorsByCountry findAuthorsByCountry,
-                          AddAuthorService addAuthorService,
-                          EditAuthorService editAuthorService,
-                          DeleteAuthorService deleteAuthorService) {
-        this.getAllBooksService = getAllBooksService;
-        this.getBookService = getBookService;
-        this.findAllBooksByAuthorService = findAllBooksByAuthorService;
-        this.addBookService = addBookService;
-        this.deleteBookService = deleteBookService;
-        this.editBookService = editBookService;
-        this.getAllAuthorsService = getAllAuthorsService;
-        this.getAuthorService = getAuthorService;
-        this.findAuthorsByCountry = findAuthorsByCountry;
+    public BookController(AddAuthorService addAuthorService, AddBookService addBookService, DeleteAuthorService deleteAuthorService, DeleteBookService deleteBookService, EditAuthorService editAuthorService, EditBookService editBookService, FindAllBooksByAuthorService findAllBooksByAuthorService, FindAllBooksByCountryService findAllBooksByCountryService, FindAuthorsByCountry findAuthorsByCountry, GetAllAuthorsService getAllAuthorsService, GetAllBooksService getAllBooksService, GetAuthorService getAuthorService, GetBookService getBookService) {
         this.addAuthorService = addAuthorService;
-        this.editAuthorService = editAuthorService;
+        this.addBookService = addBookService;
         this.deleteAuthorService = deleteAuthorService;
+        this.deleteBookService = deleteBookService;
+        this.editAuthorService = editAuthorService;
+        this.editBookService = editBookService;
+        this.findAllBooksByAuthorService = findAllBooksByAuthorService;
+        this.findAllBooksByCountryService = findAllBooksByCountryService;
+        this.findAuthorsByCountry = findAuthorsByCountry;
+        this.getAllAuthorsService = getAllAuthorsService;
+        this.getAllBooksService = getAllBooksService;
+        this.getAuthorService = getAuthorService;
+        this.getBookService = getBookService;
     }
 
     @GetMapping("books")
@@ -79,6 +70,12 @@ public class BookController {
     @GetMapping("books/author/{authorId}")
     public ResponseEntity<List<BookDTO>> getAllBooksFromAuthorId(@PathVariable Integer authorId) {
         return findAllBooksByAuthorService.run(authorId);
+    }
+
+    @GetMapping("books/country/{countryName}")
+    public ResponseEntity<List<BookDTO>> getAllBooksFromCountry(@PathVariable String countryName)
+    {
+        return findAllBooksByCountryService.run(countryName);
     }
 
     @GetMapping("author/country/{countryName}")
