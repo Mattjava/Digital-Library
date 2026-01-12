@@ -24,3 +24,6 @@ hs_err_pid*
 replay_pid*
 
 Library-Manager/src/main/resources/application.properties
+
+.idea
+.DNS_Store
